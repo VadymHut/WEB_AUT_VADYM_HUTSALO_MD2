@@ -28,6 +28,11 @@ export class AppointmentPage extends BasePage
     return cy.get("#txt_visit_date");
   }
 
+  static day(day)
+  {
+    return cy.contains("td.day", day);
+  }
+
   static get comment()
   {
     return cy.get("#txt_comment");

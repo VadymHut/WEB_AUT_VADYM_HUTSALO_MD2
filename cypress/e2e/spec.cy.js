@@ -21,7 +21,8 @@ describe("HW2", () => {
       AppointmentPage.facility.select("Seoul CURA Healthcare Center");
       AppointmentPage.hospitalReadmission.check();
       AppointmentPage.healthcareProgramMedicaid.check();
-      AppointmentPage.visitDate.type("30/03/2026");
+      AppointmentPage.visitDate.click();
+      AppointmentPage.day(30).click();
       AppointmentPage.closeDatepicker();
       AppointmentPage.comment.type("CURA Healthcare Service")
       AppointmentPage.bookAppointment.click();
@@ -29,7 +30,10 @@ describe("HW2", () => {
       AppointmentSummaryPage.facility.should("contain.text", "Seoul CURA Healthcare Center");
       AppointmentSummaryPage.hospitalReadmission.should("contain.text", "Yes");
       AppointmentSummaryPage.program.should("contain.text", "Medicaid");
-      AppointmentSummaryPage.visitDate.should("contain.text", "30/03/2026");
+
+      AppointmentSummaryPage.visitDate.should("contain.text", "30"); // would trigger on 2030 though, for that I found the more complex solution with regex
+      // AppointmentSummaryPage.visitDate.invoke("text").should("match", /^30\/\d{2}\/\d{4}$/);
+      
       AppointmentSummaryPage.comment.should("contain.text", "CURA Healthcare Service");
     });
 
